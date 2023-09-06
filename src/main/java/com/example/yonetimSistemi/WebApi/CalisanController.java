@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.yonetimSistemi.business.abstracts.CalisanService;
+import com.example.yonetimSistemi.dtos.calisanDTOs.CreateCalisanDTO;
+import com.example.yonetimSistemi.dtos.calisanDTOs.GetCalisanDTO;
+import com.example.yonetimSistemi.dtos.calisanDTOs.UpdateCalisanDTO;
 import com.example.yonetimSistemi.entities.Calisan;
 
 @RestController
@@ -24,25 +27,17 @@ public class CalisanController {
 		this.calisanService = calisanService;
 	}
 	@GetMapping("/getAllCalisanlar")
-	public ResponseEntity<List<Calisan>> getAllCalisanlar(){
-		return new ResponseEntity<List<Calisan>>(calisanService.getAllCalisan(), HttpStatus.OK);
+	public ResponseEntity<List<GetCalisanDTO>> getAllCalisanlar(){
+		return new ResponseEntity<List<GetCalisanDTO>>(calisanService.getAllCalisan(), HttpStatus.OK);
 	}
 	@PostMapping("/addCalisan")
-	public void addCalisan(@RequestBody Calisan calisan) {
+	public void addCalisan(@RequestBody CreateCalisanDTO calisan) {
 		calisanService.addCalisan(calisan);
 	}
 	@PutMapping("/updateCalisan")
-	public void updateCalisan(@RequestBody Calisan calisan) {
+	public void updateCalisan(@RequestBody UpdateCalisanDTO calisan) {
 		calisanService.updateCalisan(calisan);
 		
 	}
-	@GetMapping("/getAllCalisanByYoneticiId")
-	public ResponseEntity<List<Calisan>> getAllCalisanByYoneticiId(@RequestBody Long id){
-		return new ResponseEntity<List<Calisan>>(calisanService.getAllCalisanByYoneticiId(id), HttpStatus.OK);
-	}
 	
-	@GetMapping("/getAllAverageDepartmanMaas")
-	public ResponseEntity<List<Long>> getAllAverageDepartmanMaas() {
-		return new ResponseEntity<List<Long>>(calisanService.getAllAverageDepartmanMaas(), HttpStatus.OK);
-	}
 }

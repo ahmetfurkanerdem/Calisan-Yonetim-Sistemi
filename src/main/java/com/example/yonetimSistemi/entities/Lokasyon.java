@@ -14,7 +14,7 @@ public class Lokasyon {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 	
 	@Column(name = "lokasyon_adi")
 	private String lokasyonAdi;
@@ -32,13 +32,13 @@ public class Lokasyon {
 	private String ulke;
 	
 	@OneToOne(mappedBy = "lokasyon")
-	private Ofis ofis;
+	private Departman departman;
 
 	public Lokasyon() {
 		super();
 	}
 
-	public Lokasyon(Long id, String lokasyonAdi, String adres, int postaKodu, String sehir, String ulke, Ofis ofis) {
+	public Lokasyon(int id, String lokasyonAdi, String adres, int postaKodu, String sehir, String ulke, Departman departman) {
 		super();
 		this.id = id;
 		this.lokasyonAdi = lokasyonAdi;
@@ -46,10 +46,10 @@ public class Lokasyon {
 		this.postaKodu = postaKodu;
 		this.sehir = sehir;
 		this.ulke = ulke;
-		this.ofis = ofis;
+		this.departman = departman;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -93,13 +93,12 @@ public class Lokasyon {
 		this.ulke = ulke;
 	}
 
-	public Ofis getOfis() {
-		return ofis;
+	public Departman getDepartman() {
+		return departman;
 	}
 
-	public void setOfis(Ofis ofis) {
-		this.ofis = ofis;
+	public void setDepartman(Departman departman) {
+		this.departman = departman;
 	}
-	
 	
 }

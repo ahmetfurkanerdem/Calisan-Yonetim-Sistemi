@@ -26,15 +26,16 @@ public class Departman {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private Long id;
+	private int id;
 	
 	@Column(name = "departman_adi")
 	private String departmanAdi;
 	
-	@Column(name = "lokasyonu")
-	private String lokasyonu;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "lokasyon_id", referencedColumnName = "id")
+	private Lokasyon lokasyon;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "yonetici_id", referencedColumnName = "id")
 	private Yonetici departmanYoneticisi;
 	
@@ -45,17 +46,17 @@ public class Departman {
 		super();
 	}
 
-	public Departman(Long id, String departmanAdi, String lokasyonu, Yonetici departmanYoneticisi,
+	public Departman(int id, String departmanAdi, Lokasyon lokasyonu, Yonetici departmanYoneticisi,
 			List<Calisan> calisanlar) {
 		super();
 		this.id = id;
 		this.departmanAdi = departmanAdi;
-		this.lokasyonu = lokasyonu;
+		this.lokasyon = lokasyonu;
 		this.departmanYoneticisi = departmanYoneticisi;
 		this.calisanlar = calisanlar;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -67,12 +68,12 @@ public class Departman {
 		this.departmanAdi = departmanAdi;
 	}
 
-	public String getLokasyonu() {
-		return lokasyonu;
+	public Lokasyon getLokasyon() {
+		return lokasyon;
 	}
 
-	public void setLokasyonu(String lokasyonu) {
-		this.lokasyonu = lokasyonu;
+	public void setLokasyon(Lokasyon lokasyonu) {
+		this.lokasyon = lokasyonu;
 	}
 
 	public Yonetici getDepartmanYoneticisi() {
